@@ -20,7 +20,7 @@ SimpleElastix can be compiled with the SuperBuild. The SuperBuild is a script th
     $ cmake ../SimpleElastix/SuperBuild
     $ make -j4
 
-When the project has been built, we can find language packages in the :code:`${BUILD_DIRECTORY}/SimpleITK-build/Wrapping` directory. For example, to install the python module onto your system, navigate to
+Note :code:`make -j4` specifies the number of cores to use during the build, it does not affect the compiled code. When the project has been built, we can find language packages in the :code:`${BUILD_DIRECTORY}/SimpleITK-build/Wrapping` directory. For example, to install the python module onto your system, navigate to
 
 ::
 
@@ -204,6 +204,7 @@ This error may stem from a space in the path of the build directory. For example
 SimpleElastix takes a long time to build!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The full build take 2+ hours to build on a standard machine. We can speed up compilation by deselecting Examples, Testing and any wrapped languages we don't need. Other than that there is not much we can do. SimpleITK has to compile all filters (including elastix) for all pixel types in order to support runtime selection of the correct template parameters. 
+One option is to build on a computer with a large number of cores and specifying more cores in :code:`make -j{NUMBER_OF_CORES}` will reduce the time substantially. For instance if :code:`nproc` returns 48 cores, specifying :code:`make -j60` will work stably, given there is approximately 4GB RAM per core on the machine.
 
 I am unable to assign a parameter to a parameter map in a parameter map list
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
